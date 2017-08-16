@@ -1,0 +1,44 @@
+<html>
+<head>
+    <meta charset="utf-8">
+    <style>
+        html, body{
+            margin : 0;
+            padding : 0;
+            height : 100%;
+            width : 100%;
+            background-color : grey;
+        }
+    </style>
+</head>
+<body>
+    <h1></h1>
+</body>
+<script>
+
+    var url = new URL(window.location.href);
+    var guid = url.searchParams.get("guid");
+
+    existingUser(guid);
+    loadGame(guid);
+
+    function existingUser(guid){
+        var rest = new XMLHttpRequest();
+        rest.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                   // console.log("Respuesta: "+this.responseText);
+                    if(this.response != 1){
+                        console.log("Error");
+                    }
+                }
+            };
+        rest.open("GET","http://wikibots.webcindario.com/verifyGuid.php?guid='"+guid+"'",true);
+        rest.send();
+    }
+
+    function loadGame(guid){
+        document.getElementsByTagName('h1')[0].innerText = ("Cargando al usuario "+guid);
+    }
+
+</script>
+</html>
