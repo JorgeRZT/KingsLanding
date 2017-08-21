@@ -14,6 +14,9 @@
 <body>
     <h1></h1>
 </body>
+
+    //This script extract the "GUID" param from the url
+    //and send a XMLHttpRequest in order to know if that guid is stored in a database hosted in a server
 <script>
 
     var url = new URL(window.location.href);
@@ -32,6 +35,7 @@
                     }
                 }
             };
+        //The "verifyGuid.php" recives the parameter and returns 1 (the guid exists) or 0 (the guid isn´t stored)
         rest.open("GET","http://wikibots.webcindario.com/verifyGuid.php?guid='"+guid+"'",true);
         rest.send();
     }
